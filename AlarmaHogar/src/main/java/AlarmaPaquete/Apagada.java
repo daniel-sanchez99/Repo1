@@ -2,15 +2,14 @@ package alarmaPaquete;
 
 public class Apagada extends Estado {
 	
-	@Override
-	public Estado alarmaOn(AlarmaHogar contexto) {
-		this.exitAction(contexto);
+	public void alarmaOn(AlarmaHogar contexto) {
 		contexto.getPiloto().parpadeaPiloto();
-		
+		contexto.setEstado(getEsperando());
+		contexto.getEstado().entryAction(contexto);
 	}
 	
-	@Override
 	public void entryAction(AlarmaHogar contexto) {
+		desactivarSensores(contexto);
 		contexto.getPiloto().apagaPiloto();
 	}
 }
